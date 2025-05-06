@@ -4,6 +4,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const dashboardRoutes = require("./routes/dashboard");
 const depositRoutes = require("./routes/deposit");
+const transactionsRoutes = require("./routes/transactions");
 
 const cookieParser = require("cookie-parser"); //store JWT safely in cookies
 
@@ -15,6 +16,7 @@ app.use(cookieParser());
 app.use("/auth", authRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/deposit", depositRoutes);
+app.use("/transactions", transactionsRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
