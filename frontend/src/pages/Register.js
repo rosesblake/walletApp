@@ -4,10 +4,12 @@ import WalletApi from "../services/api";
 import AuthFormWrapper from "../components/AuthFormWrapper";
 import AuthInput from "../components/AuthInput";
 import ErrorAlert from "../components/ErrorAlert";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Register() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errorMsg, setErrorMsg] = useState("");
+  const { setIsLoading } = useAuth();
 
   const navigate = useNavigate();
 
@@ -20,6 +22,7 @@ export default function Register() {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
+      setIsLoading(true);
       if (formData.username.length > 20) {
         setErrorMsg("Username must be less than 20 characters");
         return;
@@ -33,6 +36,8 @@ export default function Register() {
     } catch (err) {
       console.error("Signup failed:", err);
       setErrorMsg("Signup failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 

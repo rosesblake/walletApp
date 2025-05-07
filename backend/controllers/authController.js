@@ -7,6 +7,22 @@ exports.register = async (req, res) => {
   const { username, password } = req.body;
 
   try {
+    if (
+      !username ||
+      typeof username !== "string" ||
+      username.length < 3 ||
+      username.length > 20
+    ) {
+      return res
+        .status(400)
+        .json({ error: "Username must be at least 3 characters" });
+    }
+    if (!password || password.length < 6) {
+      return res
+        .status(400)
+        .json({ error: "Password must be at least 6 characters" });
+    }
+
     //checks duplicate user
     const [existing] = await pool.query(
       "SELECT * FROM users WHERE username = ?",
@@ -85,4 +101,13 @@ exports.getMe = async (req, res) => {
     console.error("Token error:", err);
     res.status(401).json({ error: "Unauthorized: invalid token" });
   }
+};
+
+exports.logout = async (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
+  res.json({ message: "Logged out" });
 };

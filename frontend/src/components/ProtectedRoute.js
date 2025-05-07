@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import WalletApi from "../services/api";
 
 export default function ProtectedRoute({ children }) {
   const { user, setUser } = useAuth();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUser() {
@@ -14,6 +15,7 @@ export default function ProtectedRoute({ children }) {
         setUser(res.user);
       } catch {
         setUser(null);
+        navigate("/login");
       } finally {
         setLoading(false);
       }

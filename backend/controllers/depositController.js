@@ -3,6 +3,7 @@ const pool = require("../config/db");
 
 exports.deposit = async (req, res) => {
   const { amount, payment_method_id } = req.body;
+  console.log("REQ BODY:", req.body);
 
   try {
     //payment intent
@@ -11,6 +12,11 @@ exports.deposit = async (req, res) => {
       currency: "usd", //static currency for now
       payment_method: payment_method_id,
       confirm: true,
+      automatic_payment_methods: {
+        //had to add this for stripe test use
+        enabled: true,
+        allow_redirects: "never",
+      },
     });
 
     // update balance
