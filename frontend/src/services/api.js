@@ -16,6 +16,13 @@ class WalletApi {
     return res.data;
   }
 
+  static async getBalance() {
+    const res = await axios.get(`${BASE_URL}/dashboard`, {
+      withCredentials: true,
+    });
+    return res.data;
+  }
+
   static async getMe() {
     const res = await axios.get(`${BASE_URL}/auth/me`, {
       withCredentials: true,
