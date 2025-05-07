@@ -51,3 +51,5 @@ REACT_APP_BASE_URL=http://localhost:3001
 REACT_APP_STRIPE_PK=your_stripe_pk
 
 npm start
+
+> ⚠️ Previous commits included a `.env` file. This has been removed and ignored, and the Stripe secret has been rotated to ensure security.
