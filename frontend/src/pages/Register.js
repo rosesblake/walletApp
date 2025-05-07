@@ -23,8 +23,8 @@ export default function Register() {
     evt.preventDefault();
     try {
       setIsLoading(true);
-      if (formData.username.length > 20) {
-        setErrorMsg("Username must be less than 20 characters");
+      if (formData.username.length > 20 || formData.username.length < 3) {
+        setErrorMsg("Username must be between 3-20 characters");
         return;
       }
       if (formData.password.length < 6) {
@@ -32,6 +32,7 @@ export default function Register() {
         return;
       }
       await WalletApi.register(formData);
+      await WalletApi.login(formData);
       navigate("/dashboard");
     } catch (err) {
       console.error("Signup failed:", err);

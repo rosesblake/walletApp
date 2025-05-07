@@ -27,13 +27,18 @@ See `/backend/db/schema.sql` for the table definitions.
 
 npm install
 
-in .env
-JWT_SECRET=your_jwt_secret
-STRIPE_SECRET_KEY=your_stripe_key
-DB_USER=root
-DB_PASSWORD=your_db_password
-DB_HOST=localhost
-DB_DATABASE=wallet-app
+in .env  
+JWT_SECRET=your_jwt_secret  
+STRIPE_SECRET_KEY=your_stripe_key  
+DB_USER=root  
+DB_PASSWORD=your_db_password  
+DB_HOST=localhost  
+DB_DATABASE=wallet-app  
+DB_NAME=wallet-app  
+NODE_ENV=development  
+DB_PORT=3306
+
+PORT=3001
 
 node index.js
 
@@ -41,7 +46,8 @@ node index.js
 
 npm install
 
-in .env
-REACT_APP_BASE_URL=http://localhost:3001
+in .env  
+REACT_APP_BASE_URL=http://localhost:3001  
+REACT_APP_STRIPE_PK=your_stripe_pk
 
 npm start

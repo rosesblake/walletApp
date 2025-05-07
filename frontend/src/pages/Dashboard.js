@@ -8,7 +8,7 @@ export default function Dashboard() {
   const [balance, setBalance] = useState(null);
   const [transactions, setTransactions] = useState(null);
   const [showAll, setShowAll] = useState(false);
-  const { logout, setIsLoading } = useAuth();
+  const { logout, setIsLoading, user } = useAuth();
 
   const navigate = useNavigate();
 
@@ -47,9 +47,12 @@ export default function Dashboard() {
           </button>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 text-center mb-6">
+        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 text-center">
           Wallet Dashboard
         </h1>
+        <p className="text-sm text-center mb-6 text-gray-400">
+          {user.username}
+        </p>
 
         <div className="bg-gradient-to-r from-green-400 to-green-600 text-white rounded-xl p-6 shadow-inner flex flex-col items-center justify-center mb-8">
           <span className="text-lg uppercase tracking-wide">
