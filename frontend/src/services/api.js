@@ -3,6 +3,8 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:3001";
 
+axios.defaults.withCredentials = true;
+
 class WalletApi {
   static async register(data) {
     const res = await axios.post(`${BASE_URL}/auth/register`, data);
@@ -11,6 +13,13 @@ class WalletApi {
 
   static async login(data) {
     const res = await axios.post(`${BASE_URL}/auth/login`, data);
+    return res.data;
+  }
+
+  static async getMe() {
+    const res = await axios.get(`${BASE_URL}/auth/me`, {
+      withCredentials: true,
+    });
     return res.data;
   }
 }

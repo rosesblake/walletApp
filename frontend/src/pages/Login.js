@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import WalletApi from "../services/api";
 import AuthFormWrapper from "../components/AuthFormWrapper";
 import AuthInput from "../components/AuthInput";
 import ErrorAlert from "../components/ErrorAlert";
+import { useAuth } from "../contexts/AuthContext";
 
-export default function Register() {
+export default function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errorMsg, setErrorMsg] = useState("");
+
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -20,24 +22,19 @@ export default function Register() {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      if (formData.username.length > 20) {
-        setErrorMsg("Username must be less than 20 characters");
-        return;
-      }
-      if (formData.password.length < 6) {
-        setErrorMsg("Password must be at least 6 characters");
-        return;
-      }
-      await WalletApi.register(formData);
+      await login(formData);
       navigate("/dashboard");
     } catch (err) {
-      console.error("Signup failed:", err);
-      setErrorMsg("Signup failed");
+      console.error("Login failed:", err);
+      setErrorMsg("Incorrect username/password");
     }
   };
 
   return (
-    <AuthFormWrapper title="Create Your Wallet">
+    <AuthFormWrapper
+      title="Welcome Back"
+      subtitle="Log in to access your wallet."
+    >
       <form onSubmit={handleSubmit}>
         <ErrorAlert message={errorMsg} />
 
@@ -46,7 +43,7 @@ export default function Register() {
           name="username"
           type="text"
           label="Username"
-          placeholder="Enter a username"
+          placeholder="Your wallet ID"
           value={formData.username}
           onChange={handleChange}
         />
@@ -55,7 +52,7 @@ export default function Register() {
           name="password"
           type="password"
           label="Password"
-          placeholder="Create a password"
+          placeholder="Your password"
           value={formData.password}
           onChange={handleChange}
         />
@@ -64,16 +61,16 @@ export default function Register() {
           type="submit"
           className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition shadow-sm mt-4"
         >
-          Sign Up
+          Log In
         </button>
 
         <p className="mt-6 text-center text-sm text-gray-500">
-          Already have an account?{" "}
+          Don’t have an account?{" "}
           <a
-            href="/login"
+            href="/register"
             className="text-blue-600 hover:text-blue-700 font-medium"
           >
-            Log in
+            Sign up
           </a>
         </p>
       </form>

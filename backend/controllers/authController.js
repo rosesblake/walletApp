@@ -69,3 +69,20 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+//added to help token check for frontend
+exports.getMe = async (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized: no token" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.json({ user: { id: decoded.userId, username: decoded.username } });
+  } catch (err) {
+    console.error("Token error:", err);
+    res.status(401).json({ error: "Unauthorized: invalid token" });
+  }
+};

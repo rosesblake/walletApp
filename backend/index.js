@@ -9,9 +9,15 @@ const transactionsRoutes = require("./routes/transactions");
 const cookieParser = require("cookie-parser"); //store JWT safely in cookies
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use("/auth", authRoutes);
 app.use("/dashboard", dashboardRoutes);
