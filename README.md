@@ -16,6 +16,11 @@ A basic wallet app with signup, login, deposit (via Stripe), and transaction tra
 view diagram at https://dbdiagram.io/d/WalletApp-681a765a5b2fc4582f7d54f1
 See `/backend/db/schema.sql` for the table definitions.
 
+### DB Setup
+
+CREATE DATABASE wallet_app;  
+mysql -u root -p wallet_app < backend/db/schema.sql
+
 ## Stack
 
 - Node.js/Express
