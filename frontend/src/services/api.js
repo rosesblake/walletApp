@@ -44,6 +44,13 @@ class WalletApi {
     });
     return res.data;
   }
+
+  static async deposit(data) {
+    const res = await axios.post(`${BASE_URL}/deposit`, data, {
+      withCredentials: true,
+    });
+    return res.data;
+  }
 }
 
 export default WalletApi;

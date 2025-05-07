@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import axios from "axios";
+import WalletApi from "../services/api";
 
 export default function DepositForm({ onSuccess }) {
   const stripe = useStripe();
@@ -41,15 +41,12 @@ export default function DepositForm({ onSuccess }) {
 
     try {
       setIsSubmitting(true);
+      //forgot to replace with api class call after testing
+      const res = await WalletApi.deposit({
+        amount: numericAmount,
+        payment_method_id: paymentMethod.id,
+      });
 
-      const res = await axios.post(
-        "http://localhost:3001/deposit",
-        {
-          amount: numericAmount,
-          payment_method_id: paymentMethod.id,
-        },
-        { withCredentials: true }
-      );
       setMessage(`Deposit successful!`);
       setAmount("");
       cardElement.clear();

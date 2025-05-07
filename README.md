@@ -2,6 +2,11 @@
 
 A basic wallet app with signup, login, deposit (via Stripe), and transaction tracking.
 
+## Live Deployment
+
+Included live deployment via render/railway for quick viewing.  
+Deployed at: wallet-app-64c1.onrender.com/
+
 ## Features
 
 - JWT auth with cookies
