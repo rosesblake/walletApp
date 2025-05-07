@@ -38,8 +38,8 @@ STRIPE_SECRET_KEY=your_stripe_key
 DB_USER=root  
 DB_PASSWORD=your_db_password  
 DB_HOST=localhost  
-DB_DATABASE=wallet-app  
-DB_NAME=wallet-app  
+DB_DATABASE=wallet_app  
+DB_NAME=wallet_app  
 NODE_ENV=development  
 DB_PORT=3306
 
