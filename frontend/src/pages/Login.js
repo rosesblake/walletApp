@@ -9,7 +9,7 @@ export default function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errorMsg, setErrorMsg] = useState("");
 
-  const { login } = useAuth();
+  const { login, setIsLoading } = useAuth();
 
   const navigate = useNavigate();
 
@@ -22,11 +22,14 @@ export default function Login() {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
+      setIsLoading(true);
       await login(formData);
       navigate("/dashboard");
     } catch (err) {
       console.error("Login failed:", err);
       setErrorMsg("Incorrect username/password");
+    } finally {
+      setIsLoading(false);
     }
   };
 
